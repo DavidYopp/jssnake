@@ -1,4 +1,4 @@
-const GAME_SPEED = 100;
+
 const CANVAS_BORDER_COLOUR = 'black';
 const CANVAS_BACKGROUND_COLOUR = 'white';
 const SNAKE_COLOUR = 'lightgreen';
@@ -15,7 +15,7 @@ let snake = [
   {x: 110, y: 150}
 ];
 
-
+let GAME_SPEED = 100;
 let score = 0;
 let changingDirection = false;
 let foodX;
@@ -26,12 +26,6 @@ let dy = 0;
 
 const gameCanvas = document.getElementById('gameCanvas');
 const ctx = gameCanvas.getContext("2d");
-
-// ctx.fillStyle = CANVAS_BACKGROUND_COLOUR;
-// ctx.strokestyle = CANVAS_BORDER_COLOUR;
-// ctx.fillRect(0, 0, gameCanvas.width, gameCanvas.height);
-// ctx.strokeRect(0, 0, gameCanvas.width, gameCanvas.height);
-
 
 main();
 
@@ -73,6 +67,7 @@ function advanceSnake() {
   const didEatFood = snake[0].x === foodX && snake[0].y === foodY;
   if (didEatFood) {
     score += 10;
+    GAME_SPEED -= 3;
     document.getElementById('score').innerHTML = score;
     createFood();
   } else {
@@ -93,7 +88,7 @@ function didGameEnd() {
 }
 
 function randomTen(min, max) {
-  return Math.round(Math.random() * (max-min) + min / 10) * 10;
+  return Math.round((Math.random() * (max-min) + min) / 10) * 10;
 }
 
 function createFood() {
